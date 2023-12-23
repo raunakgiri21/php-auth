@@ -15,8 +15,14 @@
         $email = $password = '';
 
         if(isset($_POST['submit'])){
-          $email = mysqli_real_escape_string($conn, $_POST['email']);
-          $password = mysqli_real_escape_string($conn, $_POST['password']);
+          $email = mysqli_real_escape_string($conn, trim($_POST['email']));
+          $password = mysqli_real_escape_string($conn, trim($_POST['password']));
+
+          // validate email and password
+          if(!$email or !$password){
+            echo "<div class='error-msg'>Fields Cannot be Empty!!</div>";
+            exit();
+          }
           
           // verify unique email
           $verify_query = mysqli_query($conn, "select * from users where email='$email'");
