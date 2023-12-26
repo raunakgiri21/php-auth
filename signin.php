@@ -8,7 +8,6 @@
   <div class="my-container">
     <div class="my-form">
       <?php
-        session_start();
         // connect to the database
         include('./config/db_connect.php');
 
@@ -33,8 +32,8 @@
             if(!password_verify($password, $row['password'])) {
               echo "<div class='error-msg'>Incorrect Password!</div>";
             }else {
-              $_SESSION['name'] = $row['name'];
-              $_SESSION['email'] = $row['email'];
+              session_start();
+              $_SESSION['id'] = $row['id'];
               header('Location: index.php');
             }
           }

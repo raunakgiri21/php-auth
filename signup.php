@@ -36,8 +36,7 @@
           } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
             mysqli_query($conn, "insert into users(name, email, password) values('$name', '$email', '$hash')");
-            $_SESSION["name"] = $name;
-            $_SESSION["email"] = $email;
+            $_SESSION["id"] = mysqli_insert_id($conn);
             header('Location: index.php');
           }
         }
